@@ -3,6 +3,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import BottomNavigation from "./BottomNavigation";
 import Login from "../screens/Authentication/Login";
 import Register from "../screens/Authentication/Register";
+import Favorie from "../screens/Favorie/Favorie";
 import {
   View,
   Text,
@@ -54,7 +55,7 @@ function StackNavigator() {
               >
                 <AntDesign name="shoppingcart" size={24} color="black" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => {navigation.navigate("Favorie");}}> 
                 <AntDesign name="hearto" size={24} color="black" />
               </TouchableOpacity>
             </View>
@@ -103,6 +104,7 @@ function StackNavigator() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="Favorie" component={Favorie} />
     
     </Stack.Navigator>
   );

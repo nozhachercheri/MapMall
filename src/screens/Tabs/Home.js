@@ -6,29 +6,48 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  FlatList,
 } from "react-native";
+import Produits from "../../components/ProductItem";
 
-const Home = ({ navigation }) => {
-  const [data, setData] = useState([]);
+const Home = () => {
+  const data = [
+    {
+      title: "robe",
+      image:
+        "https://img.freepik.com/free-photo/assortment-t-shirts_23-2147669600.jpg?w=360&t=st=1679447534~exp=1679448134~hmac=990b3efa3faf2b61f87af20f2e07353fffb98a1e4de1372a1a52768add8a0d9b",
+    },
+    {
+      title: "robe1",
+      image:
+        "https://img.freepik.com/free-photo/assortment-t-shirts_23-2147669600.jpg?w=360&t=st=1679447534~exp=1679448134~hmac=990b3efa3faf2b61f87af20f2e07353fffb98a1e4de1372a1a52768add8a0d9b",
+    },
+    {
+      title: "robe2",
+      image:
+        "https://img.freepik.com/free-photo/assortment-t-shirts_23-2147669600.jpg?w=360&t=st=1679447534~exp=1679448134~hmac=990b3efa3faf2b61f87af20f2e07353fffb98a1e4de1372a1a52768add8a0d9b",
+    },
+  ];
+  // const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
 
-  useEffect(() => {
-    fetchData(
-      "https://947d-102-169-30-23.eu.ngrok.io/theshopp/api/v1/all-shops"
-    );
-  }, []);
+  // useEffect(() => {
+  //   fetchData(
+  //     "https://947d-102-169-30-23.eu.ngrok.io/theshopp/api/v1/all-shops"
+  //   );
+  // }, []);
 
-  const fetchData = async (url) => {
-    try {
-      const response = await fetch(url);
-      const json = await response.json();
-      setData(json.results);
-      setFilteredData(json.results);
-      console.log(json.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const fetchData = async (url) => {
+  //   try {
+  //     const response = await fetch(url);
+  //     const json = await response.json();
+  //     setData(json.results);
+  //     setFilteredData(json.results);
+  //     console.log(json.results);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const searchFilterFunction = (text) => {
     if (text) {
@@ -60,8 +79,8 @@ const Home = ({ navigation }) => {
           style={{
             fontStyle: "italic",
             fontWeight: "bold",
-           
-         
+            fontFamily: "Helvetica",
+            textDecoration: "underline",
             color: "black",
           }}
         >
@@ -89,7 +108,8 @@ const Home = ({ navigation }) => {
           style={{
             fontStyle: "italic",
             fontWeight: "bold",
-       
+            fontFamily: "Helvetica",
+            textDecoration: "underline",
             color: "black",
           }}
         >
@@ -121,7 +141,8 @@ const Home = ({ navigation }) => {
           style={{
             fontStyle: "italic",
             fontWeight: "bold",
-       
+            fontFamily: "Helvetica",
+            textDecoration: "underline",
             color: "black",
           }}
         >
@@ -232,6 +253,35 @@ const Home = ({ navigation }) => {
           }}
         />
       </View>
+      <View style={styles.container}>
+        <Image
+          source={require("../../../assets/R.jpg")}
+          style={{
+            marginRight: 10,
+            marginLeft: 10,
+            width: 150,
+            height: 200,
+          }}
+        />
+        <Image
+          source={require("../../../assets/women.jpg")}
+          style={{
+            marginRight: 10,
+            marginLeft: 10,
+            width: 150,
+            height: 200,
+          }}
+        />
+        <Image
+          source={require("../../../assets/c.jpg")}
+          style={{
+            marginRight: 10,
+            marginLeft: 10,
+            width: 150,
+            height: 200,
+          }}
+        />
+      </View>
 
       {filteredData.map((item, index) => {
         return (
@@ -246,6 +296,36 @@ const Home = ({ navigation }) => {
           </View>
         );
       })}
+      <View style={styles.separator} />
+      <TouchableOpacity
+        onPress={() => {}}
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 10,
+        }}
+      >
+        <Text
+          style={{
+            fontStyle: "italic",
+            fontWeight: "bold",
+            fontFamily: "Helvetica",
+            textDecoration: "underline",
+            color: "black",
+          }}
+        >
+          Les Produits
+        </Text>
+
+        <View>
+          <FlatList
+            numColumns={3}
+            data={data}
+            renderItem={(item) => <Produits data={item.item} />}
+          />
+        </View>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -264,6 +344,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft: 10,
     marginTop: 10,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#ffff",
+    marginVertical: 10,
   },
   rectangle: {
     backgroundColor: "#D7BDE2",
